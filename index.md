@@ -1,9 +1,9 @@
 ---
 layout: home
-description: "A responsive Jekyll theme with editorial tendencies by designer Michael Rose."
-tags: [Jekyll, theme, responsive, blog, template]
+description: "A technique blog sharing my notes and thoughts. -- JiangJun"
+tags: [JiangJun, 江骏, blog, OpenStack, computer science]
 image:
   feature: texture-feature-01.jpg
-  credit: Texture Lovers
-  creditlink: http://texturelovers.com
+  credit: Robert Garrett
+  creditlink: http://photography.nationalgeographic.com/photography/photo-of-the-day/cape-canaveral-shuttle-launch/
 ---
