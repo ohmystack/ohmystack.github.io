@@ -2,7 +2,7 @@ title:            Oh My Stack
 tagline:          A short tagline
 description:      Sharing my notes and thoughts.
 #Comment out url when working locally to resolve base urls correctly
-url:              http://jiangjun1990.github.io
+#url:              http://jiangjun1990.github.io
 
 # Owner/author information
 owner:
@@ -14,7 +14,7 @@ owner:
   twitter: http://twitter.com/jiangjun1990
   facebook:
   github: https://github.com/jiangjun1990
-  linkedin: http://www.linkedin.com/in/jiangjun1990
+  linkedin: 
   instagram: http://instagram.com/jiangjun1990
   lastfm:
   tumblr:
