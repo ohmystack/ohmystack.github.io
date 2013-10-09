@@ -12,11 +12,9 @@ image:
 ---
 
 
-Jiang Jun
-
-江骏
-
-... Building ...
+Jiang Jun, 江骏  
+(Shanghai, China)  
+*... Building ...*
 
 ## Contact
 
