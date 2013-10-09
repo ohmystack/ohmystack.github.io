@@ -1,0 +1,12 @@
+.site-name {
+  font-size: 1.8rem;
+  margin-top: -0.6rem;
+  margin-bottom: 0;
+}
+p+p {
+  margin-top: -0.5rem;
+  text-indent: 0; 
+}
+#index article h2 {
+  text-transform: capitalize;
+}

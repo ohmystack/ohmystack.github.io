@@ -1,9 +1,9 @@
 ---
 layout: page
-permalink: /theme-setup/index.html
-title: Theme Setup
-description: "Instructions on how to install and customize the Jekyll theme Minimal Mistakes."
-tags: [Jekyll, theme, responsive]
+permalink: /plans/index.html
+title: Plans
+description: "我的一些计划，学习计划、生活计划、工作计划。"
+tags: [plan]
 image:
   feature: texture-feature-02.jpg
   credit: Texture Lovers
@@ -20,7 +20,52 @@ image:
 </div>
 </section><!-- /#table-of-contents -->
 
-General notes and suggestions for customizing Minimal Mistakes.
+这里会先记录下学习的愿望，然后把学习过程中记录下来的文章列在每个项目的后面。
+
+<br />
+
+## *Foundation*
+---
+
+### Git
+
+### Vim
+
+### Code Style
+
+### Linux
+
+### Python
+
+### OpenStack Community
+
+<br />
+<br />
+
+## *Advanced*
+---
+
+### OpenStack - Horizon
+
+### LESS
+
+### d3.js
+
+### Polymer
+
+
+<br />
+<br />
+
+## *Pro*
+---
+
+### Other parts of OpenStack
+
+### Have a successful 'pull request'
+
+
+<br />
 
 ## Basic Setup
 
