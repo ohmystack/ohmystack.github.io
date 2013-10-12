@@ -6,8 +6,8 @@ description: "我的一些计划，学习计划、生活计划、工作计划。
 tags: [plan]
 image:
   feature: texture-feature-02.jpg
-  credit: Texture Lovers
-  creditlink: http://texturelovers.com
+  credit: 
+  creditlink: 
 ---
 
 <section id="table-of-contents" class="toc">
