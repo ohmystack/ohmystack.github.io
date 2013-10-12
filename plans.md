@@ -31,13 +31,16 @@ image:
 
 ### Vim
 
-### Code Style
-
 ### Linux
 
 ### Python
 
 ### OpenStack Community
+
+### Code Style
+
+### Code Review Skill
+
 
 <br />
 <br />
