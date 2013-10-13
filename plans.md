@@ -68,7 +68,7 @@ image:
 
 ### Other parts of OpenStack
 
-### Have a successful 'pull request'
+### Have a successful 'pull request' in OpenStack project
 
 
 <br />
