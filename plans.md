@@ -28,7 +28,7 @@ image:
 ---
 
 ### Git
-* [3分钟配好华丽实用的 Vim For Python](../articles/vim-for-python-in-3-minutes)
+* [3分钟配好华丽实用的 Vim For Python]({{ site.url }}/articles/vim-for-python-in-3-minutes)
 
 ### Vim
 
