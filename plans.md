@@ -28,6 +28,7 @@ image:
 ---
 
 ### Git
+* [3分钟配好华丽实用的 Vim For Python](../articles/vim-for-python-in-3-minutes)
 
 ### Vim
 
@@ -41,6 +42,7 @@ image:
 
 ### Code Review Skill
 
+### Algorithm
 
 <br />
 <br />
@@ -52,10 +54,11 @@ image:
 
 ### LESS
 
-### d3.js
+### JavaScript (e.g. d3.js)
 
 ### Polymer
 
+### Advanced algorithm
 
 <br />
 <br />
