@@ -2,3 +2,13 @@ p+p {
   margin-top: -0.5rem;
   text-indent: 0; 
 }
+blockquote {
+  font-size: 1rem;
+  margin-left: 0px;
+}
+ul {
+  margin-bottom: 2em;
+}
+.highlight {
+  margin-top: -1rem;
+}
