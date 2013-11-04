@@ -1,10 +1,25 @@
+.article-wrap {
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif;
+  font-size: 16px;
+  line-height: 27px;
+}
+@media only screen and (min-width: 86.375em) {
+  #main article {
+   width: 41%;
+  }
+}
+
 p+p {
   margin-top: -0.5rem;
   text-indent: 0; 
 }
 blockquote {
-  font-size: 1rem;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif;
+  font-size: 14px;
+  line-height: 23px;
+  color: #7D7D7D;
   margin-left: 0px;
+  font-style: normal;
 }
 ul {
   margin-bottom: 2em;
