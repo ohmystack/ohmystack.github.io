@@ -47,7 +47,7 @@ parted /dev/xxx
 * `print` 查看分区表。留意要操作的分区 'Number' 这一项，后面操作要用到。
 * `unit` 改变 parted 所用的描述大小的默认单位(比如设为 'compact' 就是以 'MB' 为单位)。  
 值得注意的是，如果用 MB/GB 这样的单位，磁盘 sector 的选取会有误差的。parted 会为你选最近的 sector，但未必精确。比如 unit 为 MB，那么可能产生 +-500KB 的误差；如果是 GB，那就可能 +-500MB 的误差，这就无法容忍了。所以如果是'创建分区'这样的操作，建议用 'MiB' 这样的单位，而不是 'MB'。'MiB' 会是一个精确值，parted 不会像对待 'MB' 那样去找它最近的单元。
-* `resize <minor> <start> <end>` 对指定 minor 号的分区从 start 位置到 end 位置
+* `resize <minor> <start> <end>` 对指定 minor 号（或 Number 号）的分区从 start 位置到 end 位置
 这里 start/end 可以是 xxxMB，也可以是负值，表示从磁盘末尾往前多少的位置，比如 `-0` 就是指到磁盘的末尾。
 
 更多命令详情请参考：
@@ -68,9 +68,9 @@ Number  Start   End     Size    Type      File system  Flags
 
 用命令：
 {% highlight bash%}
-resize 3 257MB -0
+resize 2 257MB -0
 {% endhighlight %}
-其实，只需输入 `resize 3 `，回车，剩下的两个参数，parted 会通过交互的方式让你填写的。`-0` 表示到那个分区的磁盘末尾。
+其实，只需输入 `resize 2 `，回车，剩下的两个参数，parted 会通过交互的方式让你填写的。`-0` 表示到那个分区的磁盘末尾。
 
 现在再 `print` 看一下，
 {% highlight bash%}
