@@ -33,12 +33,10 @@ image:
 * [3分钟配好华丽实用的 Vim For Python]({{ site.url }}/articles/vim-for-python-in-3-minutes)
 
 ### Linux
-* [LVM 基础]({{ site.url }}/articles/LVM_basic)
-* [LVM 实战：磁盘扩容]({{ site.url }}/articles/LVM_in_action)
+* [LVM 基础]({{ site.url }}/articles/LVM-basic)
+* [LVM 实战：磁盘扩容]({{ site.url }}/articles/LVM-in-action)
 
 ### Python
-
-### OpenStack Community
 
 ### Code Style
 
@@ -52,7 +50,8 @@ image:
 ## *Advanced*
 ---
 
-### OpenStack - Horizon
+### OpenStack
+* [用 DevStack 安装 OpenStack]({{ site.url }}/articles/install-OpenStack-using-Devstack)
 
 ### LESS
 

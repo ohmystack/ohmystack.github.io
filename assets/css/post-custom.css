@@ -1,14 +1,34 @@
+body {
+  background-color: #f8f8f5;
+}
 .article-wrap {
   font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', STHeiti, 'WenQuanYi Micro Hei', SimSun, sans-serif;
   font-size: 16px;
   line-height: 27px;
+  color: #5c5c5c;
+}
+.image-wrap:after {
+  border-bottom-color: #f8f8f5;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'PT Sans', sans-serif;
+}
+h2, h3 {
+  margin-top: 1.5em;
+}
+@media only screen and (min-width: 37.5em) {
+  #main article {
+    width: 60%;
+  }
 }
 @media only screen and (min-width: 86.375em) {
   #main article {
-   width: 41%;
+   width: 47%;
   }
 }
-
+p {
+  margin: 1.2rem 0 1rem;
+}
 p+p {
   margin-top: -0.5rem;
   text-indent: 0; 
@@ -20,6 +40,15 @@ blockquote {
   color: #7D7D7D;
   margin-left: 0px;
   font-style: normal;
+}
+p code, li code {
+  font-size: 14px;
+  line-height: 27px;
+  padding: 1px 5px;
+  border: 1px solid #D1D1CC;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
 }
 ul {
   margin-bottom: 2em;

@@ -1,50 +1,181 @@
 ---
 layout: post
-title: 用 Devstack 安装 OpenStack
-description: "Devstack 在降低了无数搭建 OpenStack 的工作量的同时，也不是那么简单就用起来的。"
+title: 用 DevStack 安装 OpenStack
+description: "DevStack 在降低了无数搭建 OpenStack 的工作量的同时，也不是那么简单就用起来的。"
 category: articles
-tags: [openstack, devstack]
+tags: [openstack, DevStack]
+image:
+  feature: posts_img/2013-12-31-install-OpenStack-using-Devstack.jpg
 ---
 
-[Devstack](http://devstack.org/) 毫无疑问是现在**最方便**的搭建 OpenStack 的方法。于是，很多文章和视频就开使用“xx分钟搭好 OpenStack”这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了“xx分钟”。
+[DevStack](http://DevStack.org/) 毫无疑问是现在**最方便**的搭建 OpenStack 的方法。于是，很多文章和视频就开使用 “xx 分钟搭好 OpenStack” 这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了 “xx 分钟”。
 
-其实呢，是有几个值得注意的地方没有注意到，就直接开始使用 Devstack 了。而 Devstack 在简化了无数搭建的工作量的同时，也不是那么简单就用起来的。
+其实呢，是有几个值得注意的地方没有注意到，就直接开始使用 DevStack 了。而 DevStack 在简化了无数搭建的工作量的同时，也不是那么简单就用起来的。
 
-## 你的环境是否干净？
+### 你的环境是否干净？
 
-Devstack 核心就是它的 stack.sh 脚本，一步成功的前提是：**你的系统足够干净**，甚至连 MySQL、pip 等等的都可以等 Devstack 来帮你装。
+DevStack 核心就是它的 stack.sh 脚本，它能一键安装成功的前提是：**你的系统足够干净**，甚至连 MySQL、pip 等等的都可以等 DevStack 来帮你装。
 
-如果你之前尝试过 Devstack 安装，或者 apt-get 源安装 OpenStack，那么你最好把它们清理干净（如果需要，包括考虑把 MySQL 也卸载了）。
+如果你之前尝试过 DevStack 安装，或者 apt-get 源安装 OpenStack，那么你最好把它们清理干净（如果需要，包括考虑把 MySQL 也卸载了）。
 
-* 清理 Devstack 的安装，检查以下几个地方
-
-```
+* 清理 DevStack 的安装，先运行 `unstack.sh` 和 `clean.sh` ，再检查以下几个地方确认没有 OpenStack 的文件残留。  
+{% highlight bash%}
 /etc/            # 配置文件，删与 OpenStack 相关的，比如 nova, keystone, ...
-/opt/stack/      # Devstack 从 GitHub 拉下来的所有代码，全部删除
+/opt/stack/      # DevStack 从 GitHub 拉下来的所有代码，全部删除
 /usr/local/bin/   # 一些需要安装包的位置，删与 OpenStack 相关的
-```
-* 清理 apt-get 的安装，除了 `sudo apt-get remove --purge <package_name>` 后，再检查以下几个地方确认没有文件残留
+{% endhighlight %}
 
-```
+* 清理 apt-get 的安装，除了 `sudo apt-get remove --purge <package_name>` 后，再检查以下几个地方确认没有 OpenStack 的文件残留。  
+{% highlight bash%}
 /usr/share/pyshared/
 /usr/lib/python2.7/dist-packages/
-```
+{% endhighlight %}
 
-## Devstack 首页上的标准安装方法怎么样？
+### DevStack 首页上的标准安装
 
 标准安装方法其实就是两步：  
-> 把 Devstack 的代码拉下来  
+
+> 把 DevStack 的代码拉下来  
 > `git clone https://github.com/openstack-dev/devstack.git`  
 > 然后按官方的意思，就直接进去  
-> `cd devstack; ./stack.sh`  
-> 安装完成了。访问 `http://127.0.0.1/` 就可以进去玩儿了。
+> `cd DevStack; ./stack.sh`  
+> 安装完成了。访问 `http://127.0.0.1/` 就可以进去玩了。  
+> 以后想再次启动装好的 OpenStack，只需运行  
+> `./rejoin-stack.sh`
+
 
 **这个方法适合那些希望用 GitHub 上 OpenStack 的最新源码的开发者。**用这个方法，的确有可能实现 xx 分钟装好 OpenStack（只要网速给力）。
 
 但是，它忘记告诉你：
 
-1. **不要用 root 用户运行这个 stack.sh 脚本。**尽管 stack.sh 在运行的时候会检查当前是不是 root 用户，如果是，它会为你的 Linux 系统建一个名为 stack 的用户，并用这个用户完成接下来的安装。但这个 stack 用户的默认 home 目录就是 `/opt/stack/` 了，当然你可以改，但这过程总让人觉得有点怪。所以还是在安装前就切到别的有 sudo 权限的用户比较好。 
-2. **HOST_IP 配置。**这个要在 Devstack 目录下的 `localrc` 文件（如果没有，手动创建一个）里配置。可以写 `HOST_IP=127.0.0.1` ，这样装完的 Devstack，所有服务就知道来找 localhost 了，不然 Devstack 会默认用你当前的 ip 作为 HOST_IP，这样你的电脑如果是 DHCP 获取 ip 的，以后你的 ip 一变，整个 OpenStack 都跑不起来了。
-3. **有些版本，在重启电脑后，会由于 Cinder 的 Volumns 没有挂载，而不能正常启动 OpenStack。** Cinder 会默认找系统上一块名为 `stack-volumes` 的卷。既然找不到它，解决方法就是我们早一块给它。方法参考[这里](https://lists.launchpad.net/openstack/msg25488.html)。
+1. **不要用 root 用户运行这个 stack.sh 脚本。**尽管 stack.sh 在运行的时候会检查当前是不是 root 用户，如果是，它会为你的 Linux 系统建一个名为 stack 的用户，并用这个用户完成接下来的安装。但这个 stack 用户的默认 home 目录就是 `/opt/stack/` 了，当然你可以改，但这过程总让人觉得有点怪。所以还是在安装前就切到其他拥有 sudo 权限的用户比较好。 
+2. **HOST_IP 配置。**这个要在 DevStack 目录下的 `localrc` 文件（如果没有，手动创建一个）里配置。可以写 `HOST_IP=127.0.0.1` ，这样装完的 DevStack，所有服务就知道来找 localhost 了，不然 DevStack 会默认用你当前的 ip 作为 HOST_IP，这样你的电脑如果是 DHCP 获取 ip 的，以后你的 ip 一变，整个 OpenStack 都跑不起来了。
+3. **有些版本，在重启电脑后，会由于 Cinder 的 Volumns 没有挂载，而不能正常启动 OpenStack。** Cinder 会默认找系统上一块名为 `stack-volumes` 的卷。既然找不到它，解决方法就是我们造一块给它。方法参考[这里](https://lists.launchpad.net/openstack/msg25488.html)。
 4. **安装前，系统要尽量干净。**这个我在前面已经说过了。
-5. **确保网络畅通。**这个看似是一个很容易实现的东西，但在很多企业的网络环境下，各种防火墙、代理会把本来简单的安装过程搞复杂。问题集中在 pip 包的下载和 GitHub 代码的拉取。pip 可以配置 `~/.pip/pip.conf` 里的源，实在不行，企业自己搭个内部源。GitHub 如果无法拉取，可以尝试把 `stack.sh` 里
+5. **确保网络畅通。**这个看似是一个很容易实现的东西，但在很多企业的网络环境下，各种防火墙、代理会把本来简单的安装过程搞复杂。问题集中在 pip 包的下载和 GitHub 代码的拉取。pip 可以配置 `~/.pip/pip.conf` 里的源，实在不行，企业自己搭个内部源。GitHub 如果无法拉取，可以尝试把它拉取的 url 里的 `https` 换成 `http`，主要修改两个地方：   `stack.sh` 里的 `IMAGE_URLS`，以及 `stackrc` 里的 `GIT_BASE`。其它一些通用的设置代理的方法，我就不一一说了。
+
+### 如何安装 stable/grizzly 的 OpenStack
+
+DevStack 其实和 OpenStack 的 repo 一样，也是有 tag 的。
+
+如果想要搭建 OpenStack 的 stable/grizzly 版本，首先应该把 DevStack 的目录也切到 stable/grizzly 分支，而不是直接在 `localrc` 指定好几个 xxx_BRANCH 就够的。
+
+{% highlight bash%}
+cd devstack
+git checkout stable/grizzly
+{% endhighlight %}
+
+接下来，就来说说这个 `localrc` 文件。
+
+`stack.sh` 在运行的时候，按 `openrc` ➜ `stackrc` ➜ `localrc` 的顺序依次载入配置，并且如果有重复，后面的会覆盖前面的。
+
+也就是说，你在 [`openrc`](http://devstack.org/openrc.html)、[`stackrc`](http://devstack.org/stackrc.html) 和 [`localrc`](http://devstack.org/localrc.html) 的官方说明文档里看到的所有设置，全都可以用在 `localrc` 这个文件中。
+
+有这么几个常用的配置项：
+
+*  **HOST_IP**  
+	例如：`HOST_IP=127.0.0.1`  
+	这一个上面已经介绍过了。
+
+*  **XXX_PASSWORD**  
+	例如：`MYSQL_PASSWORD=12345`  
+	有好几个密码或 token，这个可以不用设，因为在 stack.sh 运行的时候，脚本会自动提示你设置。
+
+*  **enable_service / disable_service**  
+	例如：`disable_service n-net`  
+	DevStack 有一个默认安装的 service 列表（详见[这里](http://devstack.org/stackrc.html)），用这两个方法，你可以指定在默认的基础上添加或去除那个 service。（比如你想把 nova-network 换成 quantum。）
+
+	但注意一点，我不推荐直接用 `ENABLED_SERVICES+=,quantum` 这样的方式管理要安装的 service；应该用 `enable_service quantum` 这样的方法，因为 enable_service 是一个真正开放给用户使用的 bash 方法，在里面它会帮你检查重复的 service 等等，确保配置的正确性。
+
+*  **LOGFILE / VERBOSE / SCREEN_LOGDIR**  
+	例如：  
+`LOGFILE=/opt/stack/logs/stack.sh.log`  
+`VERBOSE=True`  
+`SCREEN_LOGDIR=/opt/stack/logs`   
+
+	这三个是 log 方面的设置，设置后方便检查 DevStack 安装过程中遇到的问题。
+
+*  <span style="color:#cc3c0f">**XXX_BRANCH**</span>  
+<span style="color:#cc3c0f">**好！大家提提神！重点来了。**</span>  
+	这里的 XX_BRANCH 泛指例如 "NOVA_BRANCH, KEYSTONE_BRANCH" 之类的变量。  
+	具体有哪些变量名，可以到例如 `<devstack_path>/lib/nova` 这样的模块文件的开头去找。  
+
+	这些变量指定了 DevStack 从 GitHub 拉哪个版本的代码下来。  
+	比如，我们这次想搭 stable/grizzly 的 OpenStack，所以我们就把 nova、keystone、horizon、glance... 的版本写成  
+`NOVA_BRANCH=stable/grizzly`  
+`CINDER_BRANCH=stable/grizzly`  
+`GLANCE_BRANCH=stable/grizzly`  
+`HORIZON_BRANCH=stable/grizzly`  
+`KEYSTONE_BRANCH=stable/grizzly`  
+`QUANTUM_BRANCH=stable/grizzly`   
+
+	这样是不是就可以了？
+  
+	**错！**  
+	**那些 client 也应该指定版本！**  
+
+	否则，DevStack 会默认拉 master 分支上的 client 代码。这样会引起两个问题：
+	
+    1. 要是代码版本拉错了，还能将就跑起来，这样就后患无穷。对以后的测试、打包、发布都构成隐患。  
+    2. 由于 client 代码较新，它们的 pip 依赖要求的一些第三方包也比较新，会与一些 stable/grizzly 要求的版本范围有冲突，导致 DevStack 无法一键安装成功。
+	
+	
+	然而，当你去 GitHub 上看这些 client 的 tag 时，却发现它们根本没有 stable/grizzly 这样的版本。那我的办法是，根据 tag 的一些说明文字，再配合 stable/grizzly 的发布时间，确定出每个 client 应该 checkout 到哪个 tag。
+	
+	我整理下来，stable/grizzly 的各 client 应该用的 tag 大致如下：  
+`keystoneclient:0.2.5`  
+`cinderclient:1.0.2`  
+`glanceclient:0.8.0`  
+`novaclient:2.13.0`  
+
+	那么，XXX_BRANCH 是不是只能接受 branch，而不接受 tag 呢？不是的。由 `stack.sh` 引用的 `function` 这个文件的 `git_clone` 方法看出，XXX_BRANCH 可以接受 branch 或 tag。
+
+最后，我用来安装 stable/grizzly 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
+
+{% highlight bash%}
+# Maybe you can find an updated version of this file from 
+# https://gist.github.com/jiangjun1990/7703371
+
+ADMIN_PASSWORD=<your_password>
+MYSQL_PASSWORD=<your_password>
+RABBIT_PASSWORD=<your_password>
+SERVICE_PASSWORD=<your_password>
+SERVICE_TOKEN=<your_password>
+ 
+HOST_IP=127.0.0.1
+ 
+disable_service n-net
+enable_service q-svc
+enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service q-lbaas
+enable_service quantum
+enable_service tempest
+enable_service sysstat
+ 
+# Compute Service
+NOVA_BRANCH=stable/grizzly
+NOVACLIENT_BRANCH=${NOVACLIENT_BRANCH:-2.13.0}
+# Volume Service
+CINDER_BRANCH=stable/grizzly
+CINDERCLIENT_BRANCH=${CINDERCLIENT_BRANCH:-1.0.2}
+# Image Service
+GLANCE_BRANCH=stable/grizzly
+GLANCECLIENT_BRANCH=${GLANCECLIENT_BRANCH:-0.8.0}
+# Web UI (Dashboard)
+HORIZON_BRANCH=stable/grizzly
+# Auth Services
+KEYSTONE_BRANCH=stable/grizzly
+KEYSTONECLIENT_BRANCH=${KEYSTONECLIENT_BRANCH:-0.2.5}
+# Quantum (Network) service Q
+QUANTUM_BRANCH=stable/grizzly
+ 
+#Enable Logging
+LOGFILE=/opt/stack/logs/stack.sh.log
+VERBOSE=True
+SCREEN_LOGDIR=/opt/stack/logs
+{% endhighlight %}
+
+尽管这里介绍的是 stable/grizzly 版本的安装，但不管今后版本怎样更新，如果想安装过去某个固定版本的 OpenStack，思路都是和上面相似的。
