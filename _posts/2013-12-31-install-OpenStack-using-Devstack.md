@@ -8,9 +8,9 @@ image:
   feature: posts_img/2013-12-31-install-OpenStack-using-Devstack.jpg
 ---
 
-[DevStack](http://DevStack.org/) 毫无疑问是现在**最方便**的搭建 OpenStack 的方法。于是，很多文章和视频就开使用 “xx 分钟搭好 OpenStack” 这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了 “xx 分钟”。
+[DevStack](http://DevStack.org/) 毫无疑问是现在**最方便**的搭建 OpenStack 的方法。于是，很多文章和视频就开使用 “ xx 分钟搭好 OpenStack” 这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了 “ xx 分钟”。
 
-其实呢，是有几个值得注意的地方没有注意到，就直接开始使用 DevStack 了。而 DevStack 在简化了无数搭建的工作量的同时，也不是那么简单就用起来的。
+其实，是有几个值得注意的地方没有注意到，就直接开始使用 DevStack 了。而 DevStack 在简化了无数搭建的工作量的同时，也不是那么简单就用起来的。
 
 ### 你的环境是否干净？
 
@@ -50,15 +50,15 @@ DevStack 核心就是它的 stack.sh 脚本，它能一键安装成功的前提�
 
 1. **不要用 root 用户运行这个 stack.sh 脚本。**尽管 stack.sh 在运行的时候会检查当前是不是 root 用户，如果是，它会为你的 Linux 系统建一个名为 stack 的用户，并用这个用户完成接下来的安装。但这个 stack 用户的默认 home 目录就是 `/opt/stack/` 了，当然你可以改，但这过程总让人觉得有点怪。所以还是在安装前就切到其他拥有 sudo 权限的用户比较好。 
 2. **HOST_IP 配置。**这个要在 DevStack 目录下的 `localrc` 文件（如果没有，手动创建一个）里配置。可以写 `HOST_IP=127.0.0.1` ，这样装完的 DevStack，所有服务就知道来找 localhost 了，不然 DevStack 会默认用你当前的 ip 作为 HOST_IP，这样你的电脑如果是 DHCP 获取 ip 的，以后你的 ip 一变，整个 OpenStack 都跑不起来了。
-3. **有些版本，在重启电脑后，会由于 Cinder 的 Volumns 没有挂载，而不能正常启动 OpenStack。** Cinder 会默认找系统上一块名为 `stack-volumes` 的卷。既然找不到它，解决方法就是我们造一块给它。方法参考[这里](https://lists.launchpad.net/openstack/msg25488.html)。
+3. **有些版本，在重启电脑后，会由于 Cinder 的 Volumes 没有挂载，而不能正常启动 OpenStack。** Cinder 会默认找系统上一块名为 `stack-volumes` 的卷。既然找不到它，解决方法就是我们造一块给它。方法参考[这里](https://lists.launchpad.net/openstack/msg25488.html)。
 4. **安装前，系统要尽量干净。**这个我在前面已经说过了。
 5. **确保网络畅通。**这个看似是一个很容易实现的东西，但在很多企业的网络环境下，各种防火墙、代理会把本来简单的安装过程搞复杂。问题集中在 pip 包的下载和 GitHub 代码的拉取。pip 可以配置 `~/.pip/pip.conf` 里的源，实在不行，企业自己搭个内部源。GitHub 如果无法拉取，可以尝试把它拉取的 url 里的 `https` 换成 `http`，主要修改两个地方：   `stack.sh` 里的 `IMAGE_URLS`，以及 `stackrc` 里的 `GIT_BASE`。其它一些通用的设置代理的方法，我就不一一说了。
 
 ### 如何安装 stable/grizzly 的 OpenStack
 
-DevStack 其实和 OpenStack 的 repo 一样，也是有 tag 的。
+DevStack 其实和 OpenStack 的 repo 一样，也是有不同分支的。
 
-如果想要搭建 OpenStack 的 stable/grizzly 版本，首先应该把 DevStack 的目录也切到 stable/grizzly 分支，而不是直接在 `localrc` 指定好几个 xxx_BRANCH 就够的。
+**如果想要搭建 OpenStack 的 stable/grizzly 版本**，首先应该把 DevStack 的目录也切到 stable/grizzly 分支，而不是直接在 `localrc` 指定好几个 xxx_BRANCH 就够的。
 
 {% highlight bash%}
 cd devstack
@@ -79,11 +79,11 @@ git checkout stable/grizzly
 
 *  **XXX_PASSWORD**  
 	例如：`MYSQL_PASSWORD=12345`  
-	有好几个密码或 token，这个可以不用设，因为在 stack.sh 运行的时候，脚本会自动提示你设置。
+	有好几个密码或 token，不过这个可以不用设，因为在 stack.sh 运行的时候，脚本会自动提示你设置。
 
 *  **enable_service / disable_service**  
 	例如：`disable_service n-net`  
-	DevStack 有一个默认安装的 service 列表（详见[这里](http://devstack.org/stackrc.html)），用这两个方法，你可以指定在默认的基础上添加或去除那个 service。（比如你想把 nova-network 换成 quantum。）
+	DevStack 有一个默认安装的 service 列表（详见[这里](http://devstack.org/stackrc.html)），用这两个方法，你可以指定在默认的基础上添加或去除哪个 service。（比如你想把 nova-network 换成 quantum。）
 
 	但注意一点，我不推荐直接用 `ENABLED_SERVICES+=,quantum` 这样的方式管理要安装的 service；应该用 `enable_service quantum` 这样的方法，因为 enable_service 是一个真正开放给用户使用的 bash 方法，在里面它会帮你检查重复的 service 等等，确保配置的正确性。
 
@@ -97,7 +97,7 @@ git checkout stable/grizzly
 
 *  <span style="color:#cc3c0f">**XXX_BRANCH**</span>  
 <span style="color:#cc3c0f">**好！大家提提神！重点来了。**</span>  
-	这里的 XX_BRANCH 泛指例如 "NOVA_BRANCH, KEYSTONE_BRANCH" 之类的变量。  
+	这里的 XX_BRANCH 泛指例如 "NOVA_BRANCH, KEYSTONE_BRANCH" 一类的变量。  
 	具体有哪些变量名，可以到例如 `<devstack_path>/lib/nova` 这样的模块文件的开头去找。  
 
 	这些变量指定了 DevStack 从 GitHub 拉哪个版本的代码下来。  
@@ -128,7 +128,7 @@ git checkout stable/grizzly
 `glanceclient:0.8.0`  
 `novaclient:2.13.0`  
 
-	那么，XXX_BRANCH 是不是只能接受 branch，而不接受 tag 呢？不是的。由 `stack.sh` 引用的 `function` 这个文件的 `git_clone` 方法看出，XXX_BRANCH 可以接受 branch 或 tag。
+	那么，XXX_BRANCH 是不是只能接受 branch 而不接受 tag 呢？不是的。由 `stack.sh` 引用的 `function` 这个文件的 `git_clone` 方法看出，XXX_BRANCH 可以接受 branch 或 tag。
 
 最后，我用来安装 stable/grizzly 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
 
@@ -169,10 +169,10 @@ HORIZON_BRANCH=stable/grizzly
 # Auth Services
 KEYSTONE_BRANCH=stable/grizzly
 KEYSTONECLIENT_BRANCH=${KEYSTONECLIENT_BRANCH:-0.2.5}
-# Quantum (Network) service Q
+# Quantum (Network) service
 QUANTUM_BRANCH=stable/grizzly
  
-#Enable Logging
+# Enable Logging
 LOGFILE=/opt/stack/logs/stack.sh.log
 VERBOSE=True
 SCREEN_LOGDIR=/opt/stack/logs
