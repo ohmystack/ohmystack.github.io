@@ -153,7 +153,6 @@ enable_service q-meta
 enable_service q-lbaas
 enable_service quantum
 enable_service tempest
-enable_service sysstat
  
 # Compute Service
 NOVA_BRANCH=stable/grizzly
