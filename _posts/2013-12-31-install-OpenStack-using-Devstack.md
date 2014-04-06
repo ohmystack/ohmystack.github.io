@@ -115,10 +115,8 @@ git checkout stable/grizzly
 	**那些 client 也应该指定版本！**  
 
 	否则，DevStack 会默认拉 master 分支上的 client 代码。这样会引起两个问题：
-	
-    1. 要是代码版本拉错了，还能将就跑起来，这样就后患无穷。对以后的测试、打包、发布都构成隐患。  
-    2. 由于 client 代码较新，它们的 pip 依赖要求的一些第三方包也比较新，会与一些 stable/grizzly 要求的版本范围有冲突，导致 DevStack 无法一键安装成功。
-	
+   1. 要是代码版本拉错了，还能将就跑起来，这样就后患无穷。对以后的测试、打包、发布都构成隐患。  
+   2. 由于 client 代码较新，它们的 pip 依赖要求的一些第三方包也比较新，会与一些 stable/grizzly 要求的版本范围有冲突，导致 DevStack 无法一键安装成功。
 	
 	然而，当你去 GitHub 上看这些 client 的 tag 时，却发现它们根本没有 stable/grizzly 这样的版本。那我的办法是，根据 tag 的一些说明文字，再配合 stable/grizzly 的发布时间，确定出每个 client 应该 checkout 到哪个 tag。
 	
@@ -132,7 +130,7 @@ git checkout stable/grizzly
 
 最后，我用来安装 stable/grizzly 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
 
-``` php
+```bash
 
 # Maybe you can find an updated version of this file from 
 # https://gist.github.com/jiangjun1990/7703371
