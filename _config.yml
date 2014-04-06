@@ -42,16 +42,18 @@ timezone:    Asia/Shanghai
 future:      true
 pygments:    true
 markdown:    kramdown
+#markdown:    redcarpet
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink:   /:categories/:title
 
 kramdown:
+  input: GFM    # using Github Flavored Markdown
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
-  use_coderay: false
+  use_coderay: true
 
   coderay:
     coderay_line_numbers:

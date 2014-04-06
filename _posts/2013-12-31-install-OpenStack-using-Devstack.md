@@ -132,7 +132,8 @@ git checkout stable/grizzly
 
 最后，我用来安装 stable/grizzly 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
 
-{% highlight bash%}
+``` php
+
 # Maybe you can find an updated version of this file from 
 # https://gist.github.com/jiangjun1990/7703371
 
@@ -175,6 +176,6 @@ QUANTUM_BRANCH=stable/grizzly
 LOGFILE=/opt/stack/logs/stack.sh.log
 VERBOSE=True
 SCREEN_LOGDIR=/opt/stack/logs
-{% endhighlight %}
+```
 
 尽管这里介绍的是 stable/grizzly 版本的安装，但不管今后版本怎样更新，如果想安装过去某个固定版本的 OpenStack，思路都是和上面相似的。
