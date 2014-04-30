@@ -11,11 +11,12 @@ owner:
   bio:            "A fresh OpenStack developer."
   email:          jiangjun1990@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter: http://twitter.com/jiangjun1990
+  twitter: jiangjun1990
   facebook:
-  github: https://github.com/jiangjun1990
+  github: jiangjun1990
   linkedin: 
-  instagram: http://instagram.com/jiangjun1990
+  instagram: jiangjun1990
+  weibo: jiangjun1990
   lastfm:
   tumblr:
   # For Google Authorship https://plus.google.com/authorship
