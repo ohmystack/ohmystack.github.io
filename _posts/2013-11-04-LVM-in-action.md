@@ -17,7 +17,7 @@ image:
 
 我们通过 VMware 或者 VirtualBox 的图形界面或者一些命令，我们可以很轻松地扩大虚拟机的磁盘大小，但是，磁盘变大后，系统并不会把它们利用起来。所以这时候，我们就要考虑怎么才能让这些多出来的空间能够被虚拟机里的 Linux 系统用起来。
 
-在此之前，先补充一个“磁盘 MBR”的知识[^1] ：
+在此之前，先补充一个“磁盘 MBR”的知识<sup>[[1]](#note1)</sup> ：
 
 > 1个硬盘分为两个区域，一个是MBR（主引导分区），一个是数据区域。
 > 
@@ -139,5 +139,7 @@ resize2fs -p <file_system_name>
 
 这样，磁盘 extended 分区的扩容终于完成了。
 
+- - -
 
-[^1]:[linux磁盘管理学习笔记（上）](http://www.sourcejoy.com/other_dev_tech/linux-disk-manage-1.html)
+#####注释：
+<a id="note1">[1]</a>: [linux磁盘管理学习笔记（上）](http://www.sourcejoy.com/other_dev_tech/linux-disk-manage-1.html)
