@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 用 DevStack 安装 OpenStack
+title: DevStack 安装 grizzly-eol 版本 OpenStack
 description: "DevStack 在降低了无数搭建 OpenStack 的工作量的同时，也不是那么简单就用起来的。"
 category: articles
 tags: [openstack, DevStack]
@@ -8,32 +8,37 @@ image:
   feature: posts_img/2013-12-31-install-OpenStack-using-Devstack.jpg
 ---
 
-[DevStack](http://DevStack.org/) 毫无疑问是现在**最方便**的搭建 OpenStack 的方法。于是，很多文章和视频就开使用 “ xx 分钟搭好 OpenStack” 这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了 “ xx 分钟”。
+[DevStack](http://DevStack.org/) 毫无疑问是现在 **最方便** 的搭建 OpenStack 的方法。于是，很多文章和视频就开使用 “ xx 分钟搭好 OpenStack” 这样的标题来吸引人，而结果呢，相信无数新手奉献给 OpenStack 的第一次，绝对不是只用了 “ xx 分钟”。
 
 其实，是有几个值得注意的地方没有注意到，就直接开始使用 DevStack 了。而 DevStack 在简化了无数搭建的工作量的同时，也不是那么简单就用起来的。
 
+
 ### 你的环境是否干净？
 
-DevStack 核心就是它的 stack.sh 脚本，它能一键安装成功的前提是：**你的系统足够干净**，甚至连 MySQL、pip 等等的都可以等 DevStack 来帮你装。
+DevStack 核心就是它的 stack.sh 脚本，它能一键安装成功的前提是： **你的系统足够干净** ，甚至连 MySQL、pip 等等的都可以等 DevStack 来帮你装。
 
 如果你之前尝试过 DevStack 安装，或者 apt-get 源安装 OpenStack，那么你最好把它们清理干净（如果需要，包括考虑把 MySQL 也卸载了）。
 
-* 清理 DevStack 的安装，先运行 `unstack.sh` 和 `clean.sh` ，再检查以下几个地方确认没有 OpenStack 的文件残留。  
-{% highlight bash%}
+清理步骤如下：
+
+* 清理 DevStack 的安装，先运行 `unstack.sh` 和 `clean.sh` ，再检查以下几个地方确认没有 OpenStack 的文件残留。
+  
+```bash
 /etc/            # 配置文件，删与 OpenStack 相关的，比如 nova, keystone, ...
 /opt/stack/      # DevStack 从 GitHub 拉下来的所有代码，全部删除
 /usr/local/bin/   # 一些需要安装包的位置，删与 OpenStack 相关的
-{% endhighlight %}
+```
 
 * 清理 apt-get 的安装，除了 `sudo apt-get remove --purge <package_name>` 后，再检查以下几个地方确认没有 OpenStack 的文件残留。  
-{% highlight bash%}
+
+```bash
 /usr/share/pyshared/
 /usr/lib/python2.7/dist-packages/
-{% endhighlight %}
+```
 
 ### DevStack 首页上的标准安装
 
-标准安装方法其实就是两步：  
+标准安装方法其实就是两步（先别急着照着做）：  
 
 > 把 DevStack 的代码拉下来  
 > `git clone https://github.com/openstack-dev/devstack.git`  
@@ -54,18 +59,18 @@ DevStack 核心就是它的 stack.sh 脚本，它能一键安装成功的前提�
 4. **安装前，系统要尽量干净。**这个我在前面已经说过了。
 5. **确保网络畅通。**这个看似是一个很容易实现的东西，但在很多企业的网络环境下，各种防火墙、代理会把本来简单的安装过程搞复杂。问题集中在 pip 包的下载和 GitHub 代码的拉取。pip 可以配置 `~/.pip/pip.conf` 里的源，实在不行，企业自己搭个内部源。GitHub 如果无法拉取，可以尝试把它拉取的 url 里的 `https` 换成 `http`，主要修改两个地方：   `stack.sh` 里的 `IMAGE_URLS`，以及 `stackrc` 里的 `GIT_BASE`。其它一些通用的设置代理的方法，我就不一一说了。
 
-### 如何安装 stable/grizzly 的 OpenStack
+### 如何安装 grizzly-eol 的 OpenStack
 
 DevStack 其实和 OpenStack 的 repo 一样，也是有不同分支的。
 
-**如果想要搭建 OpenStack 的 stable/grizzly 版本**，首先应该把 DevStack 的目录也切到 stable/grizzly 分支，而不是直接在 `localrc` 指定好几个 xxx_BRANCH 就够的。
+**如果想要搭建 OpenStack 的 grizzly-eol 版本**，首先应该把 DevStack 的目录也切到 grizzly-eol 这个 tag，而不是直接在 `localrc` 指定好几个 xxx_BRANCH 就够的。
 
-{% highlight bash%}
+```bash
 cd devstack
-git checkout stable/grizzly
-{% endhighlight %}
+git checkout grizzly-eol
+```
 
-接下来，就来说说这个 `localrc` 文件。
+接下来，就来说说这个 `localrc` 文件。<sup>[[1]](#note1)</sup>
 
 `stack.sh` 在运行的时候，按 `openrc` ➜ `stackrc` ➜ `localrc` 的顺序依次载入配置，并且如果有重复，后面的会覆盖前面的。
 
@@ -101,27 +106,26 @@ git checkout stable/grizzly
 	具体有哪些变量名，可以到例如 `<devstack_path>/lib/nova` 这样的模块文件的开头去找。  
 
 	这些变量指定了 DevStack 从 GitHub 拉哪个版本的代码下来。  
-	比如，我们这次想搭 stable/grizzly 的 OpenStack，所以我们就把 nova、keystone、horizon、glance... 的版本写成  
-`NOVA_BRANCH=stable/grizzly`  
-`CINDER_BRANCH=stable/grizzly`  
-`GLANCE_BRANCH=stable/grizzly`  
-`HORIZON_BRANCH=stable/grizzly`  
-`KEYSTONE_BRANCH=stable/grizzly`  
-`QUANTUM_BRANCH=stable/grizzly`   
+	比如，我们这次想搭 grizzly-eol 的 OpenStack，所以我们就把 nova、keystone、horizon、glance... 的版本写成  
+`NOVA_BRANCH=grizzly-eol`  
+`CINDER_BRANCH=grizzly-eol`  
+`GLANCE_BRANCH=grizzly-eol`  
+`HORIZON_BRANCH=grizzly-eol`  
+`KEYSTONE_BRANCH=grizzly-eol`  
+`QUANTUM_BRANCH=grizzly-eol`   
 
 	这样是不是就可以了？
   
-	**错！**  
-	**那些 client 也应该指定版本！**  
+	**不是的，那些 client 也应该指定版本！**  
 
 	否则，DevStack 会默认拉 master 分支上的 client 代码。这样会引起两个问题：
     1. 要是代码版本拉错了，还能将就跑起来，这样就后患无穷。对以后的测试、打包、发布都构成隐患。  
-    2. 由于 client 代码较新，它们的 pip 依赖要求的一些第三方包也比较新，会与一些 stable/grizzly 要求的版本范围有冲突，导致 DevStack 无法一键安装成功。
+    2. 由于 client 代码较新，它们的 pip 依赖要求的一些第三方包也比较新，会与一些 grizzly-eol 要求的版本范围有冲突，导致 DevStack 无法一键安装成功。
 	
 	
-	然而，当你去 GitHub 上看这些 client 的 tag 时，却发现它们根本没有 stable/grizzly 这样的版本。那我的办法是，根据 tag 的一些说明文字，再配合 stable/grizzly 的发布时间，确定出每个 client 应该 checkout 到哪个 tag。
+	然而，当你去 GitHub 上看这些 client 的 tag 时，却发现它们根本没有 grizzly-eol 这样的版本。那我的办法是，根据 tag 的一些说明文字，再配合从 stable/grizzly 诞生一直到 grizzly-eol 的时间段，确定出每个 client 应该 checkout 到哪个 tag。
 	
-	我整理下来，stable/grizzly 的各 client 应该用的 tag 大致如下：  
+	我整理下来，grizzly-eol 的各 client 应该用的 tag 大致如下：  
 `keystoneclient:0.2.5`  
 `cinderclient:1.0.2`  
 `glanceclient:0.8.0`  
@@ -129,7 +133,7 @@ git checkout stable/grizzly
 
 	那么，XXX_BRANCH 是不是只能接受 branch 而不接受 tag 呢？不是的。由 `stack.sh` 引用的 `function` 这个文件的 `git_clone` 方法看出，XXX_BRANCH 可以接受 branch 或 tag。
 
-最后，我用来安装 stable/grizzly 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
+最后，我用来安装 grizzly-eol 版本的 OpenStack 的 `localrc` 文件大致是下面这个样子（记得要改掉里面的`<your_password>`）：
 
 ```bash
 # Maybe you can find an updated version of this file from 
@@ -154,21 +158,21 @@ enable_service quantum
 enable_service tempest
  
 # Compute Service
-NOVA_BRANCH=stable/grizzly
+NOVA_BRANCH=grizzly-eol
 NOVACLIENT_BRANCH=${NOVACLIENT_BRANCH:-2.13.0}
 # Volume Service
-CINDER_BRANCH=stable/grizzly
+CINDER_BRANCH=grizzly-eol
 CINDERCLIENT_BRANCH=${CINDERCLIENT_BRANCH:-1.0.2}
 # Image Service
-GLANCE_BRANCH=stable/grizzly
+GLANCE_BRANCH=grizzly-eol
 GLANCECLIENT_BRANCH=${GLANCECLIENT_BRANCH:-0.8.0}
 # Web UI (Dashboard)
-HORIZON_BRANCH=stable/grizzly
+HORIZON_BRANCH=grizzly-eol
 # Auth Services
-KEYSTONE_BRANCH=stable/grizzly
+KEYSTONE_BRANCH=grizzly-eol
 KEYSTONECLIENT_BRANCH=${KEYSTONECLIENT_BRANCH:-0.2.5}
 # Quantum (Network) service
-QUANTUM_BRANCH=stable/grizzly
+QUANTUM_BRANCH=grizzly-eol
  
 # Enable Logging
 LOGFILE=/opt/stack/logs/stack.sh.log
@@ -176,4 +180,13 @@ VERBOSE=True
 SCREEN_LOGDIR=/opt/stack/logs
 ```
 
-尽管这里介绍的是 stable/grizzly 版本的安装，但不管今后版本怎样更新，如果想安装过去某个固定版本的 OpenStack，思路都是和上面相似的。
+尽管这里介绍的是 grizzly-eol 版本的安装，但不管今后版本怎样更新，如果想安装过去某个固定版本的 OpenStack，思路都是和上面相似的。
+
+- - -
+
+本文原标题是 “用 DevStack 安装 OpenStack”，只是，随着 Devstack 和 OpenStack 的不断更新，Grizzly 版本已经到了 eol(end-of-life) 要说再见的时候。感谢 Grizzly 版本这么长时间来的陪伴。
+
+- - -
+
+#####注释：
+<a id="note1">[1]</a>: 这里提到的 localrc 的用法只适合 grizzly-eol 的安装。在使用最新的 Devstack 的时候，请阅读它的官方文档，推荐将配置写在 local.conf 中，而非 localrc。
