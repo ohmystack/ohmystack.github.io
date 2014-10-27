@@ -10,16 +10,6 @@ image:
   creditlink: 
 ---
 
-<section id="table-of-contents" class="toc">
-  <header>
-    <h3 >Contents</h3>
-  </header>
-<div id="drawer" markdown="1">
-*  Auto generated table of contents
-{:toc}
-</div>
-</section><!-- /#table-of-contents -->
-
 这里会先记录下学习的愿望，然后把学习过程中记录下来的文章列在每个项目的后面。
 
 <br />
@@ -70,6 +60,5 @@ image:
 ### Other parts of OpenStack
 
 ### Have a successful 'pull request' in OpenStack project
-
 
 <br />
