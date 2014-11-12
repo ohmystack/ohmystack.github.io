@@ -43,11 +43,12 @@ image:
 ### OpenStack
 * [用 DevStack 安装 OpenStack]({{ site.url }}/articles/install-OpenStack-using-Devstack)
 
-### LESS
+### Nova
 
-### JavaScript (e.g. d3.js)
+### Neutron (Networking)
 
-### Polymer
+### Horizon
+* [Apache 运行模式 & mod_wsgi]({{ site.url }}/articles/apache-mod_wsgi)
 
 ### Advanced algorithm
 

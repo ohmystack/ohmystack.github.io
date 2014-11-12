@@ -64,7 +64,7 @@ kramdown:
     coderay_css: class
 
 redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks"]
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
   # no_intra_emphasis: do not parse emphasis (underline) inside of words. Strings such as `foo_bar_baz`
 
 include: [".htaccess"]
