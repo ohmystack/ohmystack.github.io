@@ -34,7 +34,7 @@ wsgi.multiprocess  True
 
 ## Worker (multi-threaded)
 
-**Worker 模式下，Apache 可创若干个进程，每个进程起多个 worker 线程，每个线程去接请求。（一样可以设置具体上限。）不同线程在处理请求时可以是并行的。**
+**Worker 模式下，Apache 创建若干个进程，每个进程起多个 worker 线程，每个线程去接请求。（一样可以设置具体上限。）不同线程在处理请求时可以是并行的。**
 
 如果一个进程的所有 worker 线程都满负荷了，则会启用另一个进程，在另一个进程里再开 worker 线程。
 
@@ -48,7 +48,7 @@ wsgi.multiprocess  True
 sudo apt-get install apache2-mpm-worker
 ```
 
-这里，我们不用因为 Python 的 GIL (global interpreter lock) 担心性能问题。
+这里，我们不用因为 Python 的 GIL (global interpreter lock) 而担心性能问题。
 
 因为从 Apache 接收请求，到给 URL 做 mapping 到 WSGI，或者处理静态文件，这些都是用 C 语言写出的 Apache 做的，不是 Python 做的。
 
@@ -113,11 +113,10 @@ WSGIDaemonProcess example threads=25
 **子解释器 != 进程**
 
 一般，如果一个进程中运行了多个 WSGI Application，那么这一个进程中就运行了多个 Python Sub Interpreters。  
-但是，可以通过设置 `WSGIApplicationGroup` 让 Application 在公共的 Python Sub Interpreters 中运行，即便如此，不同的进程还是无法共享 global data。也就是说，WSGIApplicationGroup 这种共享是“同个进程中不同应用”之间的共享。
 
 * 从一个 WSGI application 的角度看，在 **同一个子进程** 里处理 **同一个应用的多个请求**，这几个请求会 **共享** 同一份 global data；而 **其它子进程** 所处理的请求，就拥有不同的 global data。
 
-* 换另个角度，在每个子进程中，可以运行着多个 WSGI Application，但由于每个 Application 都有自己的 Python Sub Interpreters，所以，即使在 **同个进程** 中， **不同 Application** 之间仍然 **不共享** global data。
+* 换另个角度，在每个子进程中，可以运行着多个 WSGI Application，由于每个 Application 都有自己的 Python Sub Interpreters，所以，即使在 **同个进程** 中， **不同 Application** 之间仍然 **不共享** global data。但是，可以通过设置 `WSGIApplicationGroup` 让 Application 在公共的 Python Sub Interpreters 中运行，即便如此， **不同的进程** 还是无法共享 global data。也就是说，WSGIApplicationGroup 这种共享是“同个进程中不同应用”之间的共享。
 
 * 在同一个 Python Sub Interpreters 中，如果要用 Python module 的全局变量 (global variables)，操作时需要注意为它加锁。
 
