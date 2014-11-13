@@ -6,7 +6,7 @@ category: articles
 tags: [apache, mod_wsgi, prefork, worker, horizon]
 ---
 
-无论是 Horizon 用的 Django，还是很受欢迎的 Flask，Bottle，最后如果选择部署到 Apache 上，都要写一个 .wsgi 文件，再写一个 Apache 的 xml 配置文件，放在 `sites-available` 下面。
+无论是 Horizon 用的 Django，还是很受欢迎的 Flask，Bottle，如果最后选择部署到 Apache 上，都要写一个 .wsgi 文件，再写一个 Apache 的 xml 配置文件，放在 `sites-available` 下面。
 
 > 一般我们网上参考这些 Web 框架的官方文档，照搬一个 xml 文件就行。但我这次写的一个项目，由于我要在 Web Service 起来但时候，检查上次未完成的任务，并恢复它继续执行，还得控制不能重复恢复它两次。那我就希望了解 Apache 到底是如何起这个 wsgi 应用的，还得了解我用的这种 Apache 的工作模式里能否通过共享数据，来判别这个“恢复任务”是否已执行过。这样我才能让我的程序高性能地、按我想要的方式运行下去。
 
@@ -66,7 +66,7 @@ wsgi.multiprocess True
 查看当前 Apache 用哪种模式：
 
 ```bash
-apache2ctl -l
+apache2ctl -V
 ```
 
 Prefork 和 Worker 这两种模式，子进程都会在以下情况被 kill：
