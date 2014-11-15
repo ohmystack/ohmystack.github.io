@@ -26,7 +26,10 @@
   <article itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
     <div class="headline-wrap">
       <h1 itemprop="name">{{ page.title }}</h1>
-      <h2>{{ page.tagline }}</h2>
+      <div class="tag-list">
+        {% assign tags_list = page.tags %}
+        {% include tags_list %}
+      </div>
     </div><!--/ .headline-wrap -->
 
     <div class="article-wrap" itemprop="text">

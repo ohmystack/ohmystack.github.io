@@ -1,12 +1,12 @@
 title:            Oh My Stack
-tagline:          A blog of Jiang Jun, a fresh OpenStack developer.
+tagline:          JiangJun
 description:      Sharing my notes and thoughts.
 #Comment out url when working locally to resolve base urls correctly
 url:              http://ohmystack.com
 
 # Owner/author information
 owner:
-  name:           Jiang
+  name:           JiangJun
   avatar:         bio-photo.jpg
   bio:            "A fresh OpenStack developer."
   email:          jiangjun1990@gmail.com
@@ -70,3 +70,4 @@ redcarpet:
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
 encoding: UTF-8
+paginate: 5

@@ -6,9 +6,9 @@ tagline: JiangJun, 江骏
 tags: [about, JiangJun, 江骏]
 modified: 10-7-2013
 image:
-  feature: about-feature-01.jpg
-  credit: Craig Stevens
-  creditlink: http://www.flickr.com/photos/globalexpress11/10121430415/in/explore-2013-10-06
+  feature: texture-feature-01.jpg
+  credit: Robert Garrett
+  creditlink: http://photography.nationalgeographic.com/photography/photo-of-the-day/cape-canaveral-shuttle-launch/
 ---
 
 

@@ -1,0 +1,7 @@
+{% if tags_list.size > 0 %}
+  tags: 
+  {% for tag in tags_list %} 
+    <a class="tag" href="#{{ tag }}">{{ tag }}</a>
+  {% endfor %}
+{% endif %}
+{% assign tags_list = nil %}
