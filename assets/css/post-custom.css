@@ -1,5 +1,5 @@
 body {
-  background-color: #f8f8f5;
+  background-color: #FCFEFE;
 }
 .article-wrap {
   font-family: 'Helvetica Neue', Arial, 'Hiragino Sans GB', "Microsoft YaHei", sans-serif;
@@ -8,13 +8,13 @@ body {
   color: #5c5c5c;
 }
 .image-wrap:after {
-  border-bottom-color: #f8f8f5;
+  border-bottom-color: #FCFEFE;
 }
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'PT Sans', sans-serif;
+  font-family: 'PT Sans', 'Hiragino Sans GB', "Microsoft YaHei", sans-serif;
 }
 h2, h3 {
-  margin-top: 1.5em;
+  margin: 2em 0 1.5em 0;
 }
 @media only screen and (min-width: 37.5em) {
   #main article {
@@ -27,7 +27,7 @@ h2, h3 {
   }
 }
 p+p {
-  margin-top: -0.5rem;
+  margin-top: 0rem;
   text-indent: 0; 
 }
 blockquote {
@@ -42,13 +42,15 @@ p code, li code {
   font-size: 14px;
   line-height: 27px;
   padding: 1px 5px;
-  border: 1px solid #D1D1CC;
+  border: none;
+  color: #F8F8F8;
+  background-color: #788184;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
 ul {
-  margin-bottom: 2em;
+  margin: 0 0 2.5em 0;
 }
 .highlight {
   margin-top: -1rem;
