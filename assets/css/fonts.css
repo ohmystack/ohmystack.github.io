@@ -39,11 +39,11 @@
 /* Thank you, PT Serif! */
 
 @font-face {font-family: 'PT Serif'; 
-  src: url('../fonts/PTSerif/ptf55f_w.eot'); 
-  src: local('PT Serif'), url('../fonts/PTSerif/ptf55f_w.eot?#iefix') format('embedded-opentype'), url('../fonts/PTSerif/ptf55f_w.woff') format('woff'),url('../fonts/PTSerif/ptf55f_w.ttf') format('truetype'), url('../fonts/PTSerif/ptf55f_w.svg#PTSerif-Regular') format('svg');}
+  src: url('../fonts/PTSerif/PTF55F_W.eot'); 
+  src: local('PT Serif'), url('../fonts/PTSerif/PTF55F_W.eot?#iefix') format('embedded-opentype'), url('../fonts/PTSerif/PTF55F_W.woff') format('woff'),url('../fonts/PTSerif/PTF55F_W.ttf') format('truetype'), url('../fonts/PTSerif/PTF55F_W.svg#PTSerif-Regular') format('svg');}
 
 @font-face {font-family: 'PT Serif'; 
   font-style: italic;
-  src: url('../fonts/PTSerif/ptf56f_w.eot'); 
-  src: local('PT Serif Italic'), url('../fonts/PTSerif/ptf56f_w.eot?#iefix') format('embedded-opentype'), url('../fonts/PTSerif/ptf56f_w.woff') format('woff'),url('../fonts/PTSerif/ptf56f_w.ttf') format('truetype'), url('../fonts/PTSerif/ptf56f_w.svg#PTSerif-Italic') format('svg');}
+  src: url('../fonts/PTSerif/PTF56F_W.eot'); 
+  src: local('PT Serif Italic'), url('../fonts/PTSerif/PTF56F_W.eot?#iefix') format('embedded-opentype'), url('../fonts/PTSerif/PTF56F_W.woff') format('woff'),url('../fonts/PTSerif/PTF56F_W.ttf') format('truetype'), url('../fonts/PTSerif/PTF56F_W.svg#PTSerif-Italic') format('svg');}
 
