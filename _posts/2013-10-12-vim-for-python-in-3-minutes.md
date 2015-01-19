@@ -30,7 +30,7 @@ vim --version | grep +python
 
 接下来，
 
-* Linux 用户请 update 一下 apt-get 的源；Mac 用户请准备好 [MacPorts](http://www.macports.org/install.php)
+* Ubuntu 用户 update 一下 apt 的源；Mac 用户准备好 [MacPorts](http://www.macports.org/install.php)
 * 确保装好了 pip
 
 
