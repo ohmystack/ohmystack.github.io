@@ -39,7 +39,7 @@ vim --version | grep +python
 ```bash
 # 从 github 上拉下我的 repo 放到 `~` 目录下，并重命名为 `.vim` 
 cd ~
-git clone https://github.com/jiangjun1990/python-vim.git .vim
+git clone https://github.com/ohmystack/python-vim.git .vim
 
 # Fetch all the submodules
 cd .vim
