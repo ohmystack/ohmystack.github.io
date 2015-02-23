@@ -12,7 +12,7 @@ tags: [youtube]
 $ sudo apt-get install youtube-dl
 ```
 
-简单看下 `youtube-dl` 我们主要关注的几个参数
+简单看下 `youtube-dl` 其中几个重要参数
 
 ```bash
 $ man youtube-dl
@@ -36,7 +36,7 @@ $ man youtube-dl
 
 ### Step1. 
 
-列出这一个视频有哪些格式 & 分辨率的组合可供下载
+用 `-F` 列出这一个视频有哪些格式 & 分辨率的组合可供下载
 
 ```bash
 $ youtube-dl https://www.youtube.com/watch?v=bBeFZgEYYI8 -F
@@ -70,7 +70,7 @@ format code extension resolution  note
 
 ### Step2. 
 
-如果要下载 720p mp4 的视频，我们找到它的 `format code` 为 `136`，
+如果要下载 720p mp4 的视频，我们找到它的 `format code` 为 `136`，用 `-f 136` 下载
 
 ```bash
 $ youtube-dl https://www.youtube.com/watch?v=bBeFZgEYYI8 -f 136
