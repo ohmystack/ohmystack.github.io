@@ -1,12 +1,12 @@
 ---
 layout: post
 title: 用终端下载 Youtube 视频
-description: 登上墙外的 VM，一口气把视频下载好再回来看
+description: 用 youtube-dl，把视频一口气下载好
 category: articles
 tags: [youtube]
 ---
 
-首先登上墙外的 VM。
+在墙外的 VM 上安装 `youtube-dl`。
 
 ```bash
 $ sudo apt-get install youtube-dl
