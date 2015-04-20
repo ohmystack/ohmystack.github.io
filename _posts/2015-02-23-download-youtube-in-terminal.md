@@ -6,13 +6,23 @@ category: articles
 tags: [youtube]
 ---
 
-在墙外的 VM 上安装 `youtube-dl`。
+安装 `youtube-dl`
 
 ```bash
-$ sudo apt-get install youtube-dl
+# 请用 pip 安装，这样 youtube-dl 的版本可以保证比较新
+$ sudo pip install youtube-dl
 ```
 
-简单看下 `youtube-dl` 其中几个重要参数
+（使用 `youtube-dl` 并不代表不需要翻墙）
+
+如果需要使用 HTTP proxy，只要像往常一样
+
+```bash
+$ export HTTP_PROXY='http://<proxy_id>:<port>'
+$ export HTTPS_PROXY='http://<proxy_id>:<port>'
+```
+
+让我们简单看下 `youtube-dl` 其中几个重要参数
 
 ```bash
 $ man youtube-dl
