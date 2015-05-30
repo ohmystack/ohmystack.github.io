@@ -8,7 +8,7 @@ tags: [salt]
 
 [上一篇 Salt (1) 入门](/articles/salt-1-basic) 介绍到：
 
-* `Grains` 每一台 Minion 自身的 **静态** 属性。以 Python 字典的形式存放在 Minion 端。
+* `Grains` 是每一台 Minion 自身的 **静态** 属性。以 Python 字典的形式存放在 Minion 端。
 * `Pillar` 存放 key-value 变量。存放在 Master 端，由 Master 编译好后，下发给 Minion。所以，可以存放密码之类的涉密的或是一些需要统一配置的变量。
 
 这篇文章，就来详细说说 `Grains` 和 `Pillar` 。
@@ -18,7 +18,7 @@ tags: [salt]
 
 > http://docs.saltstack.com/en/latest/topics/yaml/index.html
 
-在介绍 Grains 和 Pillar 之前呢，我们先来简单介绍一下 YAML 这种格式，因为我们自定义的 Grains、Pillar 以及下一篇要介绍的 States 都要用 YAML 语法。可以说，在 salt 中 YAML 无处不在。YAML 其实跟 `json` 类似，但是比 json 简洁许多，现在越来越多的地方也开始用 YAML 了。如果已经对 YAML 熟悉的朋友，可以跳过这第一部分。
+在介绍 Grains 和 Pillar 之前呢，我们先来简单介绍一下 YAML 这种语法，因为我们自定义的 Grains、Pillar 以及下一篇要介绍的 States 都要用 YAML 语法。可以说，在 salt 中 YAML 无处不在。YAML 其实跟 `json` 类似，但是比 json 简洁许多，现在越来越多的地方也开始用 YAML 了。如果已经对 YAML 熟悉的朋友，可以跳过这第一部分。
 
 理解这种数据表示方式，很简单：
 
@@ -73,10 +73,10 @@ my_dictionary:
 
 > http://docs.saltstack.com/en/latest/topics/targeting/grains.html
 
-```
-salt '*' grains.ls       #查看grains分类
-salt '*' grains.items    #查看grains所有信息
-salt '*' grains.item os  #查看grains某个信息
+```bash
+salt '*' grains.ls       # 查看 grains 分类
+salt '*' grains.items    # 查看 grains 所有信息
+salt '*' grains.item os  # 查看 grains 某个信息
 salt '*' grains.get os
 ```
 
@@ -95,7 +95,7 @@ salt '*' grains.get os
 
 刷新 Grains
 
-```
+```bash
 salt '*' saltutil.sync_grains
 # OR
 salt '*' saltutil.sync_all
@@ -122,7 +122,7 @@ salt '*' saltutil.sync_all
 
 #### Pillar 简单示例
 
-```
+```bash
 # 查看 minion 的 pillar 数据
 salt '*' pillar.items
 salt '*' pillar.get xxx
@@ -141,8 +141,7 @@ base:
 #### Pillar 的内容
 
 它就是一些 `.sls` 格式的 YAML 文件。关于 `.sls` 是什么，我们会在下一篇讲到。
-
-我可以写一个 pillar，存放一些 git 相关的变量：
+比如，我来写一个 pillar，存放一些 git 相关的变量：
 
 ```yaml
 # /srv/pillar/global.sls
@@ -229,7 +228,7 @@ apache:
 
 修改 pillar 后，可以用下面命令立即同步，下发到 minion 上。
 
-```
+```bash
 sudo salt '*' saltutil.refresh_pillar
 # OR
 salt '*' saltutil.sync_all
