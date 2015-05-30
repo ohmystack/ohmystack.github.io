@@ -57,3 +57,15 @@ span.pagination-nav-btn {
 .nav-current-page-num {
   border-bottom: none;
 }
+blockquote p {
+  margin-bottom: 0.625rem;
+}
+/* hightlight */
+.highlight .cp {
+  font-style: normal;
+}
+.highlight .c1, .highlight .c {
+  font-style: normal;
+  color: #599E0A;
+}
+/* end of hightlight */
