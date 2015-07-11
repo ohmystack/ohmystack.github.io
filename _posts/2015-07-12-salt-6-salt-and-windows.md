@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Salt (6) Salt & Windows
-description: "Salt Minion 在 Windows 还是会有一些坑的，列举一些我遇到过的"
+description: "Salt Minion 在 Windows 上还是会有一些坑的，列举一些我遇到过的"
 category: articles
 tags: [salt]
 ---
 
-Salt Minion 在 Windows 还是会有一些坑的。这里只能列举一些我遇到过的。
+Salt Minion 在 Windows 上还是会有一些坑的。这里只能列举一些我遇到过的。
 
 ## pip
 
@@ -22,3 +22,5 @@ install-requirements:
     - name: pip install -r C:\xxx\requirements.txt
     - cwd: C:\Python27\Scripts
 ```
+
+#### [继续更新...]
