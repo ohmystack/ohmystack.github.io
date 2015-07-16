@@ -3,7 +3,7 @@ layout: post
 title: DevStack 安装 grizzly-eol 版本 OpenStack
 description: "DevStack 在降低了无数搭建 OpenStack 的工作量的同时，也不是那么简单就用起来的。"
 category: articles
-tags: [openstack, DevStack]
+tags: [OpenStack, DevStack]
 image:
   feature: posts_img/2013-12-31-install-OpenStack-using-Devstack.jpg
 ---
