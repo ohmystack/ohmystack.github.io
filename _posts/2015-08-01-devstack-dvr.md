@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Make your DVR playground using DevStack
-description: "OpenStack 消息队列的公共库"
+description: "我在 2015/05/10 的一次分享"
 category: articles
 tags: [DVR, OpenStack, Neutron, Network, DevStack]
 ---
