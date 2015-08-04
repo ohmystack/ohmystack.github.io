@@ -19,7 +19,7 @@ tags: [salt]
 sudo apt-get install salt-api
 ```
 
-配置写在 `/etc/salt/master` 或单独写在 `/etc/salt/master.d/salt-api`。
+配置 `/etc/salt/master.d/salt-api.conf`。
 
 ```yaml
 rest_cherrypy:
@@ -33,7 +33,7 @@ rest_cherrypy:
 
 `salt-api` 使用了 salt 的 [External Authentication System](http://docs.saltstack.com/en/latest/topics/eauth/index.html#acl-eauth) 。
 
-修改 `/etc/salt/master` 的 `external_auth` 配置部分。
+修改 `/etc/salt/master.d/salt-api.conf`，配置 `external_auth`。
 
 ```yaml
 external_auth:
