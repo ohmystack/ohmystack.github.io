@@ -2,7 +2,7 @@ title:            Oh My Stack
 tagline:          JiangJun
 description:      Sharing my notes and thoughts.
 #Comment out url when working locally to resolve base urls correctly
-url:              http://ohmystack.com
+#url:              http://ohmystack.com
 
 # Owner/author information
 owner:
