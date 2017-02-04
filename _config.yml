@@ -6,15 +6,15 @@ url:              http://ohmystack.com
 
 # Owner/author information
 owner:
-  name:           JiangJun
+  name:           Jiang Jun
   avatar:         bio-photo.jpg
-  bio:            "A fresh OpenStack developer."
+  bio:            "Playing TensorFlow with Kubernetes"
   email:          jiangjun1990@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter: ohmystack
   facebook:
   github: ohmystack
-  linkedin: 
+  linkedin: ohmystack
   instagram: ohmystack
   weibo: jiangjun1990
   lastfm:
