@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 机器学习的数据隐私Part1/3-差分隐私
+title: 机器学习的数据隐私(1/3)-差分隐私
 description: ""
 category: articles
-tags: [machine-learning, privacy]
+tags: [machine-learning, data-privacy]
 ---
 
 隐私保护机器学习是一个非常活跃的研究领域。这里将解释最有技术背后的一些原理并展示一些实用的案例，来说明如何将它们适配进机器学习流水线。
@@ -87,4 +87,4 @@ DP可以分为两种主要方法：局部DP和全局DP。在局部DP中，如先
 ---
 
 > 本文节选自我参与翻译的《机器学习流水线实战》，并做了重新编辑。
-> 阅读更多内容，可以购买实体书：https://item.jd.com/10039673039939.html
+> 阅读更多内容，可以购买实体书：[https://item.jd.com/10039673039939.html](https://item.jd.com/10039673039939.html)
