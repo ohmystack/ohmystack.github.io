@@ -6,9 +6,9 @@ url:              http://ohmystack.com
 
 # Owner/author information
 owner:
-  name:           Jiang Jun
+  name:           Jun Jiang (江骏)
   avatar:         bio-photo.jpg
-  bio:            "Playing TensorFlow with Kubernetes"
+  bio:            "Staff Engineer @ Ant Group. Machine Learning GDE(Googel Developer Expert). Focus on machine learning platform and training framework optimization."
   email:          jiangjun1990@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
   twitter: ohmystack
