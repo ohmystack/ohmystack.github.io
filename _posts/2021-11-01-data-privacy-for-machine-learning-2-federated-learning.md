@@ -38,7 +38,7 @@ FL在机器学习系统的设计中引入了许多新的考虑因素，例如，
 
 TensorFlow Federated（TFF）会模拟FL的分布式设置，并包含一个可以计算分布式数据更新的随机梯度下降（stochastic gradient descent，SGD）版本。常规SGD要求梯度更新是对中心化数据集的batch计算出来的，然而在联邦设置中不存在这样的中心化数据集。目前，TFF主要针对新的联邦算法进行研究和实验。
 
-PySyft是由OpenMined组织开发的开源Python平台，用于隐私保护机器学习。它包含使用安全的多方计算（下一节中将进一步说明）来聚合数据的FL实现。它最初是为支持PyTorch模型而开发的，但已经发布了TensorFlow版本。
+PySyft是由OpenMined组织开发的开源Python平台，用于隐私保护机器学习。它包含使用安全的多方计算来聚合数据的FL实现。它最初是为支持PyTorch模型而开发的，但已经发布了TensorFlow版本。
 
 
 ---
